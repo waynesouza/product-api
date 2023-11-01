@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -39,6 +40,12 @@ public class ProductController {
     public ResponseEntity<List<ProductDTO>> findAll() {
         log.info("Request to list all products");
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/name")
+    public ResponseEntity<List<ProductDTO>> findAllWithFilters(@RequestParam("name") String name) {
+        log.info("Request to list all products by filters");
+        return ResponseEntity.ok(service.findByName(name));
     }
 
     @PutMapping

@@ -32,8 +32,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> findAllWithFilters() {
-        return null;
+    public List<ProductDTO> findByName(String name) {
+        log.info("Finding all products filtering by specifics fields");
+        return repository.findByName(name)
+                .stream().map(ProductDTO::toDto).collect(Collectors.toList());
     }
 
     @Override
