@@ -48,8 +48,8 @@ public class ProductController {
     }
 
     @GetMapping("/name")
-    public ResponseEntity<List<ProductDTO>> findAllWithFilters(@RequestParam("name") String name) {
-        log.info("Request to list all products by filters");
+    public ResponseEntity<List<ProductDTO>> findByName(@RequestParam("name") String name) {
+        log.info("Request to list all products by name");
         return ResponseEntity.ok(service.findByName(name));
     }
 
