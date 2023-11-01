@@ -12,6 +12,8 @@ public interface ProductService {
 
     List<ProductDTO> findAll();
 
+    ProductDTO findById(UUID id);
+
     List<ProductDTO> findByName(String name);
 
     void deleteById(UUID id);

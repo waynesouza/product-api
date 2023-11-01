@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,6 +41,12 @@ public class ProductController {
         return ResponseEntity.ok(service.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> findById(@PathVariable UUID id) {
+        log.info("Request to find product by id");
+        return ResponseEntity.ok(service.findById(id));
+    }
+
     @GetMapping("/name")
     public ResponseEntity<List<ProductDTO>> findAllWithFilters(@RequestParam("name") String name) {
         log.info("Request to list all products by filters");
@@ -51,12 +56,6 @@ public class ProductController {
     @PutMapping
     public ResponseEntity<ProductDTO> update(@Valid @RequestBody ProductDTO dto) {
         log.info("Request to update product");
-        return ResponseEntity.ok(service.save(dto));
-    }
-
-    @PatchMapping
-    public ResponseEntity<ProductDTO> partialUpdate(@Valid @RequestBody ProductDTO dto) {
-        log.info("Request to update specifics fields of product");
         return ResponseEntity.ok(service.save(dto));
     }
 

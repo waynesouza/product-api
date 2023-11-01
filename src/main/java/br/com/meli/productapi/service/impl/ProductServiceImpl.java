@@ -32,6 +32,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductDTO findById(UUID id) {
+        return ProductDTO.toDto(repository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Product not found")));
+    }
+
+    @Override
     public List<ProductDTO> findByName(String name) {
         log.info("Finding all products filtering by specifics fields");
         return repository.findByName(name)
@@ -41,7 +47,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteById(UUID id) {
         log.info("Deleting product with id {}", id);
-        repository.deleteById(id);
+        Product product = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
+        repository.delete(product);
     }
 
     private Product toEntity(ProductDTO dto) {
