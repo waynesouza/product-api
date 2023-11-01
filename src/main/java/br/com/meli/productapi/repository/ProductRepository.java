@@ -1,4 +1,4 @@
-package br.com.meli.productapi;
+package br.com.meli.productapi.repository;
 
 import br.com.meli.productapi.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
